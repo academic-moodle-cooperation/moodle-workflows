@@ -5,10 +5,8 @@ try {
         "main-db": mainDb,
         "main-php": mainPhp,
         "main-moodle": mainMoodle,
-        "main-oc": mainOc,
         "moodle-php": moodlePhp,
         "dbs": dbs,
-        "ocs": ocs,
         "moodle-plugin-ci": moodlePluginCi
     } = JSON.parse(core.getInput('input'));
 
@@ -33,7 +31,6 @@ try {
                 "php": php,
                 "moodle-branch": moodle,
                 "database": mainDb,
-                "opencast": mainOc,
             })
         }
     }
@@ -45,19 +42,7 @@ try {
             "php": mainPhp,
             "moodle-branch": mainMoodle,
             "database": db,
-            "opencast:": mainOc
         })
-    }
-
-    for (const oc of ocs) {
-        if (oc === mainOc)
-            continue;
-        testmatrix.push({
-            "php": mainPhp,
-            "moodle-branch": mainMoodle,
-            "database": mainDb,
-            "opencast:": oc
-        });
     }
 
     core.setOutput("test_matrix", JSON.stringify({
