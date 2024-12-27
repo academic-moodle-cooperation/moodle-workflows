@@ -7,52 +7,8 @@ name: Moodle Plugin CI
 # the used branch included. The current branch is used if no branch is specified for a required plugin.
 ########################################################################################################################
 
-on:
-  workflow_call:
-    inputs:
-      requires-tool-plugin:
-        description: 'Specifies whether the Opencast Tool plugin is required.'
-        default: false
-        required: false
-        type: boolean
-      branch-tool-plugin:
-        description: 'Specifies the branch of the Opencast Tool plugin.'
-        default: ''
-        required: false
-        type: string
-      requires-mod-plugin:
-        description: 'Specifies whether the Opencast Activity plugin is required.'
-        default: false
-        required: false
-        type: boolean
-      branch-mod-plugin:
-        description: 'Specifies the branch of the Opencast Activity plugin.'
-        default: ''
-        required: false
-        type: string
-      requires-block-plugin:
-        description: 'Specifies whether the Opencast Block plugin is required.'
-        default: false
-        required: false
-        type: boolean
-      branch-block-plugin:
-        description: 'Specifies the branch of the Opencast Block plugin.'
-        default: 'main'
-        required: false
-        type: string
-      branch-opencast-docker-default:
-        description: 'Default opencast docker branch to control the Opencast version, in case it is not provided.'
-        default: '16.7' # As of Dec. 2024 the plugins are OC 16 compatible
-        required: false
-        type: string
-
-########################################################################################################################
-
 env:
   workflow_branch_name: ${{ github.head_ref || github.ref_name }}
-  branch_tool_plugin: ${{ inputs.branch-tool-plugin || (github.head_ref || github.ref_name) }}
-  branch_mod_plugin: ${{ inputs.branch-mod-plugin || (github.head_ref || github.ref_name) }}
-  branch_block_plugin: ${{ inputs.branch-block-plugin || (github.head_ref || github.ref_name) }}
   is_moodle_plugin_ci_workflow: 1
 
 ########################################################################################################################
@@ -90,7 +46,7 @@ jobs:
 
       - name: Generate Matrices
         id: calc-matrix
-        uses: Opencast-Moodle/moodle-workflows-opencast/parse-matrix-action@main
+        uses: academic-moodle-cooperation/moodle-workflows/parse-matrix-action@main
         with:
           input: ${{ steps.config.outputs.content }}
 
