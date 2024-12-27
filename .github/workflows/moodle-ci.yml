@@ -7,6 +7,10 @@ name: Moodle Plugin CI
 # the used branch included. The current branch is used if no branch is specified for a required plugin.
 ########################################################################################################################
 
+on:
+  push:
+    branches: [ $default-branch ]
+    
 env:
   workflow_branch_name: ${{ github.head_ref || github.ref_name }}
   is_moodle_plugin_ci_workflow: 1
