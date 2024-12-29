@@ -8,9 +8,8 @@ name: Moodle Plugin CI
 ########################################################################################################################
 
 on:
-  push:
-    branches: [ $default-branch ]
-    
+  workflow_call:
+
 env:
   workflow_branch_name: ${{ github.head_ref || github.ref_name }}
   is_moodle_plugin_ci_workflow: 1
